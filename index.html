@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rate Per Mile Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Rate Per Mile Calculator</h1>
+        <form id="rateCalculator">
+            <div class="input-group">
+                <label for="totalMiles">Total Miles:</label>
+                <input type="number" id="totalMiles" placeholder="Enter total miles" required>
+            </div>
+            <div class="input-group">
+                <label for="totalRate">Total Rate ($):</label>
+                <input type="number" id="totalRate" placeholder="Enter total rate" required>
+            </div>
+            <button type="button" onclick="calculateRate()">Calculate</button>
+        </form>
+        <div id="result">
+            <p>Rate Per Mile: <span id="ratePerMile">$0.00</span></p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
