@@ -9,19 +9,66 @@
 <body>
     <div class="container">
         <h1>Rate Per Mile Calculator</h1>
-        <form id="rateCalculator">
-            <div class="input-group">
-                <label for="totalMiles">Total Miles:</label>
-                <input type="number" id="totalMiles" placeholder="Enter total miles" required>
+        
+        <!-- Tabs for Basic and Advanced Mode -->
+        <div class="tab">
+            <button class="tablinks" onclick="openTab(event, 'basic')" id="defaultOpen">Basic Mode</button>
+            <button class="tablinks" onclick="openTab(event, 'advanced')">Advanced Mode</button>
+        </div>
+
+        <!-- Basic Mode Content -->
+        <div id="basic" class="tabcontent">
+            <form id="rateCalculatorBasic">
+                <div class="input-group">
+                    <label for="totalMilesBasic">Total Miles:</label>
+                    <input type="number" id="totalMilesBasic" placeholder="Enter total miles" required>
+                </div>
+                <div class="input-group">
+                    <label for="totalRateBasic">Total Rate ($):</label>
+                    <input type="number" id="totalRateBasic" placeholder="Enter total rate" required>
+                </div>
+                <button type="button" onclick="calculateRateBasic()">Calculate</button>
+            </form>
+            <div id="resultBasic">
+                <p>Rate Per Mile: <span id="ratePerMileBasic">$0.00</span></p>
             </div>
-            <div class="input-group">
-                <label for="totalRate">Total Rate ($):</label>
-                <input type="number" id="totalRate" placeholder="Enter total rate" required>
+        </div>
+
+        <!-- Advanced Mode Content -->
+        <div id="advanced" class="tabcontent">
+            <form id="rateCalculatorAdvanced">
+                <div class="input-group">
+                    <label for="totalMilesAdvanced">Total Miles:</label>
+                    <input type="number" id="totalMilesAdvanced" placeholder="Enter total miles" required>
+                </div>
+                <div class="input-group">
+                    <label for="totalRateAdvanced">Total Rate ($):</label>
+                    <input type="number" id="totalRateAdvanced" placeholder="Enter total rate" required>
+                </div>
+                <div class="input-group">
+                    <label for="mpg">Miles per Gallon (MPG):</label>
+                    <input type="number" id="mpg" placeholder="Enter average MPG" required>
+                </div>
+                <div class="input-group">
+                    <label for="fuelCost">Fuel Cost per Gallon ($):</label>
+                    <input type="number" id="fuelCost" placeholder="Enter fuel cost per gallon" required>
+                </div>
+                <div class="input-group">
+                    <label for="dispatchPercent">Dispatch Percentage (%):</label>
+                    <input type="number" id="dispatchPercent" placeholder="Enter dispatch percentage (optional)">
+                </div>
+                <div class="input-group">
+                    <label for="factoringPercent">Factoring Company Percentage (%):</label>
+                    <input type="number" id="factoringPercent" placeholder="Enter factoring percentage (optional)">
+                </div>
+                <button type="button" onclick="calculateRateAdvanced()">Calculate</button>
+            </form>
+            <div id="resultAdvanced">
+                <p>Fuel Cost: <span id="fuelCostResult">$0.00</span></p>
+                <p>Dispatch Payment: <span id="dispatchPayment">$0.00</span></p>
+                <p>Factoring Payment: <span id="factoringPayment">$0.00</span></p>
+                <p>Net Rate After Costs: <span id="netRate">$0.00</span></p>
             </div>
-            <button type="button" onclick="calculateRate()">Calculate</button>
-        </form>
-        <div id="result">
-            <p>Rate Per Mile: <span id="ratePerMile">$0.00</span></p>
         </div>
     </div>
     <script src="script.js"></script>
