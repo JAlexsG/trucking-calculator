@@ -72,7 +72,7 @@
    <h2>Installation</h2>
     <ol>
         <li>Clone the repository:
-            <pre><code>git clone https://github.com/your-username/rate-per-mile-calculator.git</code></pre>
+            <pre><code>git clone https://github.com/JAlexsG/trucking-calculator.git</code></pre>
         </li>
         <li>Navigate to the project directory:
             <pre><code>cd rate-per-mile-calculator</code></pre>
