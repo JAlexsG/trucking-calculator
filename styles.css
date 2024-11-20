@@ -1,11 +1,12 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f5f5f5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
     margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    overflow-y: auto; /* Enable vertical scrolling */
 }
 
 .container {
@@ -13,8 +14,10 @@ body {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    width: 320px;
     text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px; /* Add space below calculator */
 }
 
 h1 {
@@ -22,39 +25,316 @@ h1 {
     margin-bottom: 20px;
 }
 
+/* Tabs */
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    display: flex;
+    background-color: #f1f1f1;
+    border-radius: 8px;
+}
+
+.tab button {
+    background-color: #f1f1f1;
+    color: #333;
+    flex: 1;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 16px;
+    transition: 0.3s;
+    font-size: 16px;
+    border-radius: 8px 8px 0 0;
+}
+
+.tab button.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.tabcontent {
+    display: none;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+/* Input fields and button styling */
 .input-group {
     margin-bottom: 15px;
+    text-align: center;
 }
 
 label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
+    text-align: center;
+    padding: 0 5px;
 }
 
 input {
-    width: 100%;
-    padding: 8px;
+    width: 90%;
+    padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
+    box-sizing: border-box;
 }
 
 button {
-    background-color: #007bff;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 100%;
-    font-size: 1em;
+        padding: 10px 20px;
+        margin: 5px; /* Add spacing between buttons */
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    
 }
 
 button:hover {
     background-color: #0056b3;
 }
 
-#result {
+#resultBasic, #resultAdvanced {
     margin-top: 20px;
     font-size: 1.2em;
+}
+
+
+
+
+/* Buttons */
+.btn {
+    margin: 5px 0;
+    padding: 10px;
+    width: 48%;
+    font-size: 1em;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.calculate-btn {
+    background-color: #007bff;
+    color: white;
+}
+
+.calculate-btn:hover {
+    background-color: #0056b3;
+}
+
+.reset-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+.reset-btn:hover {
+    background-color: #d32f2f;
+}
+
+/* Instructions Section */
+#instructions {
+    padding: 20px;
+    width: 90%;
+    max-width: 800px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    margin-top: 20px; /* Space between calculator and instructions */
+    margin-bottom: 40px; /* Add bottom margin for better layout */
+}
+
+#instructions h2 {
+    text-align: center;
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
+
+#instructions h3 {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-size: 1.2em;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+}
+
+#instructions ul {
+    list-style-type: disc;
+    margin: 10px 0 10px 20px;
+}
+
+#instructions p {
+    margin: 10px 0;
+    line-height: 1.6;
+    background-color: #f0f8ff; /* Light blue background for the intro text */
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#instructions p:first-of-type {
+    background-color: #f0f8ff;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Instruction Tabs */
+.tab {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.tab button {
+    background-color: #f1f1f1;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    transition: 0.3s;
+    font-size: 16px;
+    margin: 0 5px;
+    border-radius: 5px;
+}
+
+.tab button.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.tabcontent {
+    display: none;
+}
+
+
+/* Calculator Tabs */
+.calculator-tab {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.calc-tablinks {
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    transition: 0.3s;
+    font-size: 16px;
+    margin: 0 5px;
+    border-radius: 5px;
+    color: #333;
+
+}
+
+.calc-tablinks.active {
+    background-color: #007bff;
+    color: white;
+    border: 1px solid #007bff;
+
+}
+
+.calc-tablinks:hover {
+    background-color: #e7e7e7; /* Slight hover effect */
+}
+
+.calc-tabcontent {
+    display: none;
+}
+
+/* Instruction Tabs */
+.instruction-tab {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.inst-tablinks {
+    background-color: #f1f1f1;
+    border:  1px solid #ccc;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    transition: 0.3s;
+    font-size: 16px;
+    margin: 0 5px;
+    border-radius: 5px;
+    color: #333;
+
+}
+
+.inst-tablinks.active {
+    background-color: #007bff;
+    color: white;
+    border: 1px solid #007bff;
+}
+.inst-tabcontent {
+    display: none;
+}
+
+.inst-tablinks:hover {
+    background-color: #e7e7e7; /* Slight hover effect */
+}
+
+.inst-tabcontent ul {
+    text-align: left; /* Align text to the left */
+    margin: 0; /* Remove all margins */
+    padding-left: 20px; /* Add small padding for alignment */
+    line-height: 1.6; /* Improve spacing between list items */
+}
+
+.inst-tabcontent ul li {
+    list-style-position:unset; /* Make bullet points align with text */
+    margin: 0; /* Remove extra margin from list items */
+    padding: 0; /* Remove extra padding */
+}
+
+#calculateBasicButton,
+#calculateAdvancedButton {
+    background-color: #007bff;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+#calculateBasicButton:hover,
+#calculateAdvancedButton:hover {
+    background-color: #0056b3;
+}
+
+#resetBasicButton,
+#resetAdvancedButton {
+    background-color: #dc3545;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+#resetBasicButton:hover,
+#resetAdvancedButton:hover {
+    background-color: #a71d2a;
+}
+/* General Tab Styles */
+button.calc-tablinks, button.inst-tablinks {
+    background-color: #f1f1f1;
+    color: black;
+    border: 1px solid #ccc;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-radius: 5px;
+}
+
+/* Hover Effect */
+button.calc-tablinks:hover, button.inst-tablinks:hover {
+    background-color: #e0e0e0;
+}
+
+/* Active Tab - Blue for Selected */
+button.calc-tablinks.active, button.inst-tablinks.active {
+    background-color: #007bff; /* Blue background for active tab */
+    color: white; /* White text for contrast */
+    border: 1px solid #007bff; /* Border matches the background */
 }
