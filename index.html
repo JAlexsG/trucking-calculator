@@ -7,70 +7,168 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Calculator Section -->
     <div class="container">
         <h1>Rate Per Mile Calculator</h1>
-        
-        <!-- Tabs for Basic and Advanced Mode -->
-        <div class="tab">
-            <button class="tablinks" onclick="openTab(event, 'basic')" id="defaultOpen">Basic Mode</button>
-            <button class="tablinks" onclick="openTab(event, 'advanced')">Advanced Mode</button>
+
+        <!-- Tabs for Basic and Advanced Modes -->
+        <div class="calculator-tab">
+            <button class="calc-tablinks" onclick="openCalcTab(event, 'basic')" id="defaultCalcTab">Basic Mode</button>
+            <button class="calc-tablinks" onclick="openCalcTab(event, 'advanced')">Advanced Mode</button>
         </div>
 
         <!-- Basic Mode Content -->
-        <div id="basic" class="tabcontent">
+        <div id="basic" class="calc-tabcontent">
             <form id="rateCalculatorBasic">
                 <div class="input-group">
-                    <label for="totalMilesBasic">Total Miles:</label>
+                    <label id="totalMilesBasicLabel" for="totalMilesBasic">Total Miles:</label>
                     <input type="number" id="totalMilesBasic" placeholder="Enter total miles" required>
                 </div>
                 <div class="input-group">
-                    <label for="totalRateBasic">Total Rate ($):</label>
+                    <label id="totalRateBasicLabel" for="totalRateBasic">Total Rate ($):</label>
                     <input type="number" id="totalRateBasic" placeholder="Enter total rate" required>
                 </div>
-                <button type="button" onclick="calculateRateBasic()">Calculate</button>
+                <button type="button" id="calculateBasicButton" onclick="calculateRateBasic()">Calculate</button>
+                <button type="button" id="resetBasicButton" onclick="resetBasic()">Reset</button>
+                <div id="resultBasic">
+                    <p>Rate Per Mile: <span id="ratePerMileBasic">$0.00</span></p>
+                </div>
             </form>
-            <div id="resultBasic">
-                <p>Rate Per Mile: <span id="ratePerMileBasic">$0.00</span></p>
-            </div>
         </div>
 
         <!-- Advanced Mode Content -->
-        <div id="advanced" class="tabcontent">
+        <div id="advanced" class="calc-tabcontent">
             <form id="rateCalculatorAdvanced">
                 <div class="input-group">
-                    <label for="totalMilesAdvanced">Total Miles:</label>
+                    <label id="totalMilesAdvancedLabel" for="totalMilesAdvanced">Total Miles:</label>
                     <input type="number" id="totalMilesAdvanced" placeholder="Enter total miles" required>
                 </div>
                 <div class="input-group">
-                    <label for="totalRateAdvanced">Total Rate ($):</label>
+                    <label id="deadHeadMilesLabel" for="deadHeadMiles">Dead Head Miles to Origin:</label>
+                    <input type="number" id="deadHeadMiles" placeholder="Enter dead head miles (empty driving)" required>
+                </div>
+                <div class="input-group">
+                    <label id="totalRateAdvancedLabel" for="totalRateAdvanced">Total Rate ($):</label>
                     <input type="number" id="totalRateAdvanced" placeholder="Enter total rate" required>
                 </div>
                 <div class="input-group">
-                    <label for="mpg">Miles per Gallon (MPG):</label>
-                    <input type="number" id="mpg" placeholder="Enter average MPG" required>
+                    <label id="mpgLabel" for="mpg">Miles per Gallon (MPG):</label>
+                    <input type="text" id="mpg" placeholder="Enter average MPG (e.g., 10.50)" required maxlength="5">
                 </div>
                 <div class="input-group">
-                    <label for="fuelCost">Diesel Cost per Gallon ($):</label>
-                    <input type="number" id="fuelCost" placeholder="Enter Avg Diesel Cost " required>
+                    <label id="fuelCostLabel" for="fuelCost">Fuel Cost per Gallon ($):</label>
+                    <input type="text" id="fuelCost" placeholder="Enter fuel cost (e.g., 4.25)" required maxlength="5">
                 </div>
                 <div class="input-group">
-                    <label for="dispatchPercent">Dispatch Percentage (%):</label>
+                    <label id="dispatchPercentLabel" for="dispatchPercent">Dispatch Percentage (%):</label>
                     <input type="number" id="dispatchPercent" placeholder="Enter dispatch percentage (optional)">
                 </div>
                 <div class="input-group">
-                    <label for="factoringPercent">Factoring Company Percentage (%):</label>
+                    <label id="factoringPercentLabel" for="factoringPercent">Factoring Company Percentage (%):</label>
                     <input type="number" id="factoringPercent" placeholder="Enter factoring percentage (optional)">
                 </div>
-                <button type="button" onclick="calculateRateAdvanced()">Calculate</button>
+                <button type="button" id="calculateAdvancedButton" onclick="calculateRateAdvanced()">Calculate</button>
+                <button type="button" id="resetAdvancedButton" onclick="resetAdvanced()">Reset</button>
+                <div id="resultAdvanced">
+                    <p>Fuel Cost to Origin: <span id="fuelCostToOrigin">$0.00</span></p>
+                    <p>Fuel Cost for Trip: <span id="fuelCostResult">$0.00</span></p>
+                    <p>Dispatch Payment: <span id="dispatchPayment">$0.00</span></p>
+                    <p>Factoring Payment: <span id="factoringPayment">$0.00</span></p>
+                    <p>Net Rate After Costs: <span id="netRate">$0.00</span></p>
+                </div>
+
             </form>
-            <div id="resultAdvanced">
-                <p>Fuel Cost: <span id="fuelCostResult">$0.00</span></p>
-                <p>Dispatch Payment: <span id="dispatchPayment">$0.00</span></p>
-                <p>Factoring Payment: <span id="factoringPayment">$0.00</span></p>
-                <p>Net Rate After Costs: <span id="netRate">$0.00</span></p>
-            </div>
         </div>
     </div>
+
+    <!-- Instructions Section -->
+    <!-- Instructions Section -->
+<div id="instructions">
+    <h2>How to Use the Rate Per Mile Calculator</h2>
+
+    <!-- Tabs for English and Spanish Instructions -->
+    <div class="instruction-tab">
+        <button class="inst-tablinks" onclick="openInstructionTab(event, 'english')" id="defaultInstructionTab">English</button>
+        <button class="inst-tablinks" onclick="openInstructionTab(event, 'spanish')">Español</button>
+    </div>
+
+    <!-- English Instructions -->
+    <div id="english" class="inst-tabcontent">
+        <h3 id="rpmtitlelabel" for="rpmtitlec">What is a Rate Per Mile Calculator?</h3>
+        <p>
+            A Rate Per Mile Calculator helps truck drivers figure out how much money they are earning for every mile they drive. This is important because it helps determine whether a trip is worth your time and effort after covering all your costs, like fuel, dispatch services, and factoring fees.
+        </p>
+
+        <h3>Basic Mode</h3>
+        <p>This mode is for quick and simple calculations. Here's how to use it:</p>
+        <ul>
+            <li><strong>Total Miles:</strong> Enter the total number of miles you will drive for the trip, from pickup to delivery. For example, if your route is 500 miles, type "500."</li>
+            <li><strong>Total Rate ($):</strong> Enter the total amount of money you will be paid for the trip. For instance, if the rate is $2,000, type "2000."</li>
+            <li>Click "Calculate" to see how much money you are earning per mile.</li>
+            <li>If you need to start over, click "Reset" to clear the fields and results.</li>
+        </ul>
+
+        <h3>Advanced Mode</h3>
+        <p>This mode allows for a more detailed calculation, considering factors like fuel costs and service fees. Here's how to use it:</p>
+        <ul>
+            <li><strong>Total Miles:</strong> Enter the number of miles you will drive with a loaded truck, from pickup to delivery.</li>
+            <li><strong>Dead Head Miles to Origin:</strong> Enter the number of miles you will drive with an empty truck to reach the pickup location. For example, if you will drive 50 empty miles to pick up the load, type "50."</li>
+            <li><strong>Total Rate ($):</strong> Enter the total amount of money you will be paid for the trip.</li>
+            <li><strong>Miles per Gallon (MPG):</strong> Enter how many miles your truck can drive on one gallon of fuel. For instance, if your truck gets 7.5 MPG, type "7.50."</li>
+            <li><strong>Fuel Cost per Gallon ($):</strong> Enter the current cost of one gallon of fuel. For example, if fuel costs $4.25 per gallon, type "4.25."</li>
+            <li><strong>Dispatch Percentage (%):</strong> (Optional) Enter the percentage of your total earnings that your dispatcher will take. For instance, if your dispatcher takes 5%, type "5."</li>
+            <li><strong>Factoring Company Percentage (%):</strong> (Optional) Enter the percentage of your total earnings that your factoring company takes. For instance, if they take 3%, type "3."</li>
+            <li>Click "Calculate" to see:
+                <ul>
+                    <li>The cost of fuel for your deadhead miles and loaded miles.</li>
+                    <li>The total amount paid to your dispatcher (if applicable).</li>
+                    <li>The total amount paid to your factoring company (if applicable).</li>
+                    <li>Your final net earnings after covering all these costs.</li>
+                </ul>
+            </li>
+            <li>If you need to start over, click "Reset" to clear the fields and results.</li>
+        </ul>
+    </div>
+
+    <!-- Spanish Instructions -->
+    <div id="spanish" class="inst-tabcontent" style="display: none;">
+        <h3>¿Qué es el Calculador de Tarifa por Milla?</h3>
+        <p>
+            El Calculador de Tarifa por Milla ayuda a los conductores a calcular cuánto ganan por cada milla que conducen. Esto es esencial para determinar si un viaje vale la pena después de cubrir todos sus costos, como combustible, servicios de despacho y tarifas de factoring.
+        </p>
+
+        <h3>Modo Básico</h3>
+        <p>Este modo es para cálculos rápidos y simples. Así es como se usa:</p>
+        <ul>
+            <li><strong>Millas Totales:</strong> Ingrese la cantidad total de millas que conducirá para el viaje, desde el punto de recogida hasta la entrega. Por ejemplo, si su ruta es de 500 millas, escriba "500".</li>
+            <li><strong>Tarifa Total ($):</strong> Ingrese el monto total de dinero que se le pagará por el viaje. Por ejemplo, si la tarifa es de $2,000, escriba "2000".</li>
+            <li>Haga clic en "Calcular" para ver cuánto gana por milla.</li>
+            <li>Si necesita comenzar de nuevo, haga clic en "Restablecer" para borrar los campos y resultados.</li>
+        </ul>
+
+        <h3>Modo Avanzado</h3>
+        <p>Este modo permite un cálculo más detallado, considerando factores como costos de combustible y tarifas de servicios. Así es como se usa:</p>
+        <ul>
+            <li><strong>Millas Totales:</strong> Ingrese la cantidad de millas que conducirá con el camión cargado, desde el punto de recogida hasta la entrega.</li>
+            <li><strong>Millas en Vacío al Origen:</strong> Ingrese la cantidad de millas que conducirá con el camión vacío para llegar al lugar de recogida. Por ejemplo, si conducirá 50 millas vacías para recoger la carga, escriba "50".</li>
+            <li><strong>Tarifa Total ($):</strong> Ingrese el monto total de dinero que se le pagará por el viaje.</li>
+            <li><strong>Millas por Galón (MPG):</strong> Ingrese cuántas millas puede recorrer su camión con un galón de combustible. Por ejemplo, si su camión rinde 7.5 millas por galón, escriba "7.50".</li>
+            <li><strong>Costo del Combustible por Galón ($):</strong> Ingrese el costo actual de un galón de combustible. Por ejemplo, si el combustible cuesta $4.25 por galón, escriba "4.25".</li>
+            <li><strong>Porcentaje del Despachador (%):</strong> (Opcional) Ingrese el porcentaje de sus ganancias totales que tomará su despachador. Por ejemplo, si su despachador toma el 5%, escriba "5".</li>
+            <li><strong>Porcentaje de la Empresa de Factoring (%):</strong> (Opcional) Ingrese el porcentaje de sus ganancias totales que tomará su empresa de factoring. Por ejemplo, si toman el 3%, escriba "3".</li>
+            <li>Haga clic en "Calcular" para ver:
+                <ul>
+                    <li>El costo del combustible para las millas vacías y cargadas.</li>
+                    <li>El monto total pagado al despachador (si corresponde).</li>
+                    <li>El monto total pagado a la empresa de factoring (si corresponde).</li>
+                    <li>Sus ganancias netas finales después de cubrir todos estos costos.</li>
+                </ul>
+            </li>
+            <li>Si necesita comenzar de nuevo, haga clic en "Restablecer" para borrar los campos y resultados.</li>
+        </ul>
+    </div>
+</div>
+
     <script src="script.js"></script>
 </body>
 </html>
